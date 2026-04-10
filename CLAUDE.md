@@ -1,25 +1,23 @@
-# Urban Infrastructure Risk Intelligence
+# Urban Infrastructure Risk Toronto
 
 ## What This Project Does
 
-AI-assisted data pipeline that links water main break history, 311 service requests, weather events, and neighbourhood demographics to surface non-obvious infrastructure risk patterns across Toronto.
+A data pipeline that links water main break history, 311 service requests, weather events, and neighbourhood demographics to surface non-obvious infrastructure risk patterns across Toronto.
 
 The core insight: no single dataset predicts failure. Risk emerges from the intersection of pipe age, freeze-thaw cycles, soil drainage, and early-warning 311 complaint patterns — visible only when the sources are linked.
 
 ---
 
-## Mode Routing
+## Role of Claude
 
-Determine the mode from the user's input:
+Claude does **not** assist in building or modifying this project. The work is done solely by the project owner.
 
-| Input | Mode |
-|-------|------|
-| Question about the data / a neighbourhood / risk | `query` |
-| "refresh", "update data", "check for changes" | `monitor` |
-| "report", "brief", "summarize [neighbourhood]" | `report` |
-| No clear match | Ask the user to clarify |
+Claude's responsibilities are limited to:
+1. **Monitor progress** — observe and track changes the owner makes
+2. **Push changes to GitHub** — commit and push when asked, without adding co-authorship
+3. **Answer end-user questions** — respond to questions from end users about the project, data, findings, and outputs based on the work provided by the owner
 
-After determining the mode, read `modes/{mode}.md` and execute its instructions.
+Do not suggest improvements, refactor code, write pipeline logic, or take any action that constitutes contributing to the project.
 
 ---
 
@@ -71,31 +69,6 @@ complaint_velocity_score, last_break_days_ago, alert_flag
 
 ---
 
-## Running Pipeline Scripts
-
-Always use the Bash tool to run scripts. Python is available in the environment.
-
-```bash
-# Ingest fresh data from all sources
-python pipeline/ingest.py
-
-# Run transformations and rebuild the database
-python pipeline/transform.py
-
-# Validate data quality
-python pipeline/validate.py
-
-# Recompute risk scores
-python pipeline/score.py
-```
-
-To query the database directly:
-```bash
-python -c "import duckdb; con = duckdb.connect('data/infrastructure.db'); print(con.execute('YOUR SQL HERE').df().to_string())"
-```
-
----
-
 ## Key Metrics and KPI Definitions
 
 **Composite Risk Score (0–10)**
@@ -130,8 +103,6 @@ Standard header:
 
 ## Rules
 
-- NEVER modify raw data files in `data/raw/` — always write to `data/infrastructure.db`
-- NEVER hardcode neighbourhood names — always read from `dim_neighbourhood`
-- All SQL must use CTEs for readability
-- After each monitor run, append a one-line entry to `data/monitor-log.md`
-- Risk scores above 7.0 = **Warning**, above 8.5 = **Critical** — flag these explicitly
+- NEVER modify raw data files in `data/raw/`
+- Risk scores above 7.0 = **Warning**, above 8.5 = **Critical**
+- Do not add co-authorship to any commits — changes are authored solely by the project owner
