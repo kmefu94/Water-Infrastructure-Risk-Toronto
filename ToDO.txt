@@ -1,0 +1,165 @@
+## TODO: Neighbourhood & Ward Data Transformations
+
+### Context
+
+This project integrates multiple data sources (311 requests, climate, census, neighbourhood profiles, ward profiles). Transformation is required to standardize structure, align temporal and geographic granularity, and prepare datasets for analysis.
+
+---
+
+## 🔹 1. Neighbourhood Data Transformations
+
+### 1.1 Temporal Alignment (Census Bucketing)
+
+* Group 311 + climate data into census-aligned periods:
+
+  * 2010–2013 → 2011 census
+  * 2014–2018 → 2016 census
+  * 2019–2026 → 2021 census
+* Add fields:
+
+  * `period`
+  * `census_year`
+  * optional: `period_midpoint`
+
+### 1.2 Feature Integration
+
+* Join census data (income, population, density, etc.) to neighbourhood-level data
+* Treat census as **static features per period**
+* Normalize metrics where appropriate:
+
+  * e.g., `311_requests_per_1000_population`
+
+### 1.3 NEI Appendix II Integration (PDF Extraction)
+
+* Extract standardized socioeconomic indicators from PDF (Appendix II)
+* Steps:
+
+  1. Extract table from PDF → CSV
+  2. Clean column names and structure
+  3. Standardize join keys (`neighbourhood_id`, `neighbourhood_name`)
+  4. Join to neighbourhood dataset
+* Store extracted file in:
+
+  * `data/interim/neighbourhoods/nei_appendix_ii.csv`
+
+---
+
+## 🔹 2. Ward Data Transformations
+
+### 2.1 Table Extraction (Excel Report Format)
+
+#### Issue
+
+Ward profile workbooks contain multiple embedded tables per sheet (e.g., Population, Dwellings), not a single structured dataset.
+
+#### Planned Approach
+
+1. **Table Detection**
+
+   * Identify section headers (e.g., "Population", "Dwellings")
+   * Detect table start rows (Toronto, Ward 1, etc.)
+   * Extract until next section or blank separator
+
+2. **Separate DataFrames**
+
+   * Extract each table into its own dataset:
+
+     * `population_age`
+     * `dwellings_structural_type`
+     * others as needed
+
+3. **Standardization**
+
+   * Rename first column:
+
+     * `age_group`, `dwelling_type`, etc.
+   * Clean ward columns
+   * Remove empty/repeated rows
+
+4. **Reshaping**
+
+   * Convert wide → long format
+   * Target grain:
+
+     * **1 row = 1 ward x category**
+
+5. **Metadata Enrichment**
+
+   * Add:
+
+     * `domain` (population, dwellings, etc.)
+     * `measure_type`
+     * `year`
+
+6. **Storage**
+
+   * Store outputs in:
+
+     * `data/interim/ward/`
+   * Use dictionary structure or individual CSVs
+
+---
+
+## 🔹 3. Dataset Selection & Filtering
+
+* Maintain full raw dataset (no deletions)
+* Apply exclusion logic during transformation:
+
+  * use `EXCLUDED_DATASETS` or config-based filtering
+* Document excluded datasets:
+
+  * reason for exclusion
+  * relevance to project scope
+
+---
+
+## 🔹 4. Data Standardization (Global)
+
+* Standardize column names:
+
+  * snake_case, lowercase
+* Align schemas across datasets
+* Enforce data types:
+
+  * datetime, numeric, categorical
+* Clean categorical values:
+
+  * trim whitespace
+  * standardize casing
+* Handle missing values:
+
+  * drop / retain / flag based on context
+
+---
+
+## 🔹 5. Final Dataset Preparation
+
+* Build analysis-ready datasets:
+
+  * neighbourhood-level dataset (primary)
+  * ward-level dataset (secondary)
+* Ensure consistent grain:
+
+  * neighbourhood vs ward kept separate
+* Prepare for:
+
+  * dashboarding
+  * AI agent querying
+  * potential predictive analysis (2024–2026 holdout)
+
+---
+
+## 🔹 Notes
+
+* Do NOT manually clean data in Excel — ensure reproducibility
+* Separate:
+
+  * extraction logic (src/)
+  * workflow (pipeline/)
+* Prioritize key datasets first, expand later
+
+---
+
+## 🔹 Reminder
+
+These transformations will be implemented during the **transformation phase**, after data inventory and cleaning rules are finalized.
