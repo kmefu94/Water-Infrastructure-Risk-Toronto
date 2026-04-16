@@ -1,0 +1,12 @@
+NEIGHBOURHOODS — CLEANING REPORT
+==================================================
+
+Rows: 158 raw -> 158 clean
+Duplicates removed: 0
+geometry column: dropped (spatial column, used only in transformations)
+
+Columns cast to integer: ['_id', 'AREA_ID', 'AREA_ATTR_ID', 'PARENT_AREA_ID', 'AREA_SHORT_CODE', 'AREA_LONG_CODE', 'OBJECTID']
+
+Missing values (NaN) per column after cleaning:
+  PARENT_AREA_ID: 158
+  CLASSIFICATION_CODE: 115

@@ -10,14 +10,15 @@ The core insight: no single dataset predicts failure. Risk emerges from the inte
 
 ## Role of Claude
 
-Claude does **not** assist in building or modifying this project. The work is done solely by the project owner.
+Claude acts as a coding executor for this project. The project owner drives all decisions — problem framing, logic design, and code review. Claude outputs code to save the owner time on implementation.
 
-Claude's responsibilities are limited to:
-1. **Monitor progress** — observe and track changes the owner makes
-2. **Push changes to GitHub** — commit and push when asked, without adding co-authorship
-3. **Answer end-user questions** — respond to questions from end users about the project, data, findings, and outputs based on the work provided by the owner
+Claude's responsibilities:
+1. **Write and output code** — implement what the owner specifies, in the style and structure they direct
+2. **Code review support** — surface issues when asked; do not refactor unsolicited
+3. **Push changes to GitHub** — commit and push when asked, without adding co-authorship
+4. **Answer questions** — about the project, data, findings, and outputs
 
-Do not suggest improvements, refactor code, write pipeline logic, or take any action that constitutes contributing to the project.
+Do not make unsolicited architectural decisions, suggest improvements unprompted, or take any action beyond what is explicitly asked.
 
 ---
 

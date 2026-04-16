@@ -1,0 +1,30 @@
+WATERMAINS — CLEANING REPORT
+==================================================
+
+Distribution: 46,624 raw rows -> 46,624 clean rows
+  Duplicates removed       : 0
+  geometry column          : dropped (spatial column, used only in transformations)
+  Watermain Install Date   : parsed to date (time component removed)
+  Columns cast to int      : ['_id', 'Watermain Type', 'Watermain Diameter', 'Watermain Construction Year']
+  Columns cast to float    : ['Watermain Measured Length']
+  Missing values (NaN) per column:
+    Watermain Diameter: 43
+    Watermain Material: 14
+    Watermain Install Date: 775
+    Watermain Construction Year: 775
+    Watermain Measured Length: 126
+    Watermain Location Description: 23
+
+Transmission: 2,491 raw rows -> 2,491 clean rows
+  Duplicates removed       : 0
+  geometry column          : dropped (spatial column, used only in transformations)
+  Watermain Install Date   : parsed to date (time component removed)
+  Columns cast to int      : ['_id', 'Watermain Type', 'Watermain Diameter', 'Watermain Construction Year']
+  Columns cast to float    : ['Watermain Measured Length']
+  Missing values (NaN) per column:
+    Watermain Diameter: 8
+    Watermain Install Date: 34
+    Watermain Construction Year: 40
+    Watermain Location Description: 1
+
+COMBINED TOTAL: 49,115 rows

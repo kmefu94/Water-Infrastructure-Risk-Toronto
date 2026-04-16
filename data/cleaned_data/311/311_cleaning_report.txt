@@ -1,0 +1,67 @@
+311 SERVICE REQUESTS — CLEANING REPORT
+==================================================
+
+Year 2010 (254,218 raw rows -> 254,215 clean rows)
+  Duplicates removed : 3
+  Missing values (NaN) per column:
+    Intersection Street 1: 236,260
+    Intersection Street 2: 236,302
+  Creation Date      : parsed to datetime
+
+Year 2011 (285,333 raw rows -> 285,330 clean rows)
+  Duplicates removed : 3
+  Missing values (NaN) per column:
+    Intersection Street 1: 261,455
+    Intersection Street 2: 261,465
+  Creation Date      : parsed to datetime
+
+Year 2012 (307,299 raw rows -> 307,293 clean rows)
+  Duplicates removed : 6
+  Missing values (NaN) per column:
+    Intersection Street 1: 283,252
+    Intersection Street 2: 283,253
+  Creation Date      : parsed to datetime
+
+Year 2013 (385,870 raw rows -> 385,866 clean rows)
+  Duplicates removed : 4
+  Missing values (NaN) per column:
+    Intersection Street 1: 348,508
+    Intersection Street 2: 348,510
+  Creation Date      : parsed to datetime
+
+Year 2014 (446,547 raw rows -> 446,529 clean rows)
+  Duplicates removed : 18
+  Missing values (NaN) per column:
+    Intersection Street 1: 394,848
+    Intersection Street 2: 394,861
+  Creation Date      : parsed to datetime
+
+Year 2015 (447,879 raw rows -> 447,875 clean rows)
+  Duplicates removed : 4
+  Missing values (NaN) per column:
+    Intersection Street 1: 400,871
+    Intersection Street 2: 400,902
+  Creation Date      : parsed to datetime
+
+Year 2016 (406,291 raw rows -> 406,284 clean rows)
+  Duplicates removed : 7
+  Missing values (NaN) per column:
+    Intersection Street 1: 363,960
+    Intersection Street 2: 363,993
+  Creation Date      : parsed to datetime
+
+Year 2017 (396,379 raw rows -> 396,375 clean rows)
+  Duplicates removed : 4
+  Missing values (NaN) per column:
+    Intersection Street 1: 352,485
+    Intersection Street 2: 352,552
+  Creation Date      : parsed to datetime
+
+Year 2018 (412,095 raw rows -> 412,092 clean rows)
+  Duplicates removed : 3
+  Missing values (NaN) per column:
+    Intersection Street 1: 355,405
+    Intersection Street 2: 355,484
+  Creation Date      : parsed to datetime
+
+COMBINED TOTAL: 3,341,859 rows

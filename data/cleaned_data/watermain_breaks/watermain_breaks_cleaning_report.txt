@@ -1,0 +1,8 @@
+WATERMAIN BREAKS — CLEANING REPORT
+==================================================
+
+Rows: 35,465 raw -> 35,448 clean
+Duplicates removed   : 17
+BREAK DATE           : parsed to datetime
+Columns cast to int  : ['BREAK YEAR']
+Columns cast to float: ['X COORD', 'Y COORD']
