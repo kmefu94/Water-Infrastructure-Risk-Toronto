@@ -1,18 +1,24 @@
+import sys
 import pandas as pd
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from src.utils.standardize_columns import col_to_snake
 INPUT_PATH = ROOT / "data/raw_data/neighbourhoods/neighbourhoods-4326.csv"
 OUTPUT_PATH = ROOT / "data/cleaned_data/neighbourhoods"
 OUTPUT_PATH.mkdir(parents=True, exist_ok=True)
 
-STRING_COLS = ["AREA_NAME", "AREA_DESC", "CLASSIFICATION", "CLASSIFICATION_CODE"]
-INT_COLS = ["_id", "AREA_ID", "AREA_ATTR_ID", "PARENT_AREA_ID", "AREA_SHORT_CODE",
-            "AREA_LONG_CODE", "OBJECTID"]
+STRING_COLS = ["area_name", "area_desc", "classification", "classification_code"]
+INT_COLS = ["_id", "area_id", "area_attr_id", "parent_area_id", "area_short_code",
+            "area_long_code", "objectid"]
 
 
 def clean(df):
     changes = {}
+
+    df = col_to_snake(df)
 
     # Drop geometry — spatial data, used only in transformations
     if "geometry" in df.columns:

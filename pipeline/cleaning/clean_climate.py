@@ -1,23 +1,29 @@
+import sys
 import pandas as pd
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from src.utils.standardize_columns import col_to_snake
 INPUT_PATH = ROOT / "data/raw_data/current-and-future-climate/climate-variables.csv"
 OUTPUT_PATH = ROOT / "data/cleaned_data/climate"
 OUTPUT_PATH.mkdir(parents=True, exist_ok=True)
 
 NON_NUMERIC_COLS = [
     "_id",
-    "Climate Scenario",
-    "Time Horizon",
-    "Distribution",
-    "FROST_FREE_SEASON_START_DATE",
-    "FROST_FREE_SEASON_END_DATE",
+    "climate_scenario",
+    "time_horizon",
+    "distribution",
+    "frost_free_season_start_date",
+    "frost_free_season_end_date",
 ]
 
 
 def clean(df):
     changes = {}
+
+    df = col_to_snake(df)
 
     # Remove duplicates
     before = len(df)

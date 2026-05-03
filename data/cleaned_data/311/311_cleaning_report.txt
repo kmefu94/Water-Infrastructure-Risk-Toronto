@@ -1,67 +1,77 @@
 311 SERVICE REQUESTS — CLEANING REPORT
 ==================================================
 
-Year 2010 (254,218 raw rows -> 254,215 clean rows)
+Year 2010 (254,218 raw -> 254,215 clean)
   Duplicates removed : 3
   Missing values (NaN) per column:
-    Intersection Street 1: 236,260
-    Intersection Street 2: 236,302
-  Creation Date      : parsed to datetime
+    intersection_street_1: 236,260
+    intersection_street_2: 236,302
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2011 (285,333 raw rows -> 285,330 clean rows)
+Year 2011 (285,333 raw -> 285,330 clean)
   Duplicates removed : 3
   Missing values (NaN) per column:
-    Intersection Street 1: 261,455
-    Intersection Street 2: 261,465
-  Creation Date      : parsed to datetime
+    intersection_street_1: 261,455
+    intersection_street_2: 261,465
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2012 (307,299 raw rows -> 307,293 clean rows)
+Year 2012 (307,299 raw -> 307,293 clean)
   Duplicates removed : 6
   Missing values (NaN) per column:
-    Intersection Street 1: 283,252
-    Intersection Street 2: 283,253
-  Creation Date      : parsed to datetime
+    intersection_street_1: 283,252
+    intersection_street_2: 283,253
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2013 (385,870 raw rows -> 385,866 clean rows)
+Year 2013 (385,870 raw -> 385,866 clean)
   Duplicates removed : 4
   Missing values (NaN) per column:
-    Intersection Street 1: 348,508
-    Intersection Street 2: 348,510
-  Creation Date      : parsed to datetime
+    intersection_street_1: 348,508
+    intersection_street_2: 348,510
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2014 (446,547 raw rows -> 446,529 clean rows)
+Year 2014 (446,547 raw -> 446,529 clean)
   Duplicates removed : 18
   Missing values (NaN) per column:
-    Intersection Street 1: 394,848
-    Intersection Street 2: 394,861
-  Creation Date      : parsed to datetime
+    intersection_street_1: 394,848
+    intersection_street_2: 394,861
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2015 (447,879 raw rows -> 447,875 clean rows)
+Year 2015 (447,879 raw -> 447,875 clean)
   Duplicates removed : 4
   Missing values (NaN) per column:
-    Intersection Street 1: 400,871
-    Intersection Street 2: 400,902
-  Creation Date      : parsed to datetime
+    intersection_street_1: 400,871
+    intersection_street_2: 400,902
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2016 (406,291 raw rows -> 406,284 clean rows)
+Year 2016 (406,291 raw -> 406,284 clean)
   Duplicates removed : 7
   Missing values (NaN) per column:
-    Intersection Street 1: 363,960
-    Intersection Street 2: 363,993
-  Creation Date      : parsed to datetime
+    intersection_street_1: 363,960
+    intersection_street_2: 363,993
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2017 (396,379 raw rows -> 396,375 clean rows)
+Year 2017 (396,379 raw -> 396,375 clean)
   Duplicates removed : 4
   Missing values (NaN) per column:
-    Intersection Street 1: 352,485
-    Intersection Street 2: 352,552
-  Creation Date      : parsed to datetime
+    intersection_street_1: 352,485
+    intersection_street_2: 352,552
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-Year 2018 (412,095 raw rows -> 412,092 clean rows)
+Year 2018 (412,095 raw -> 412,092 clean)
   Duplicates removed : 3
   Missing values (NaN) per column:
-    Intersection Street 1: 355,405
-    Intersection Street 2: 355,484
-  Creation Date      : parsed to datetime
+    intersection_street_1: 355,405
+    intersection_street_2: 355,484
+  creation_date      : parsed to datetime
+  ward_25            : mapped from 44-ward string via ward_map lookup
 
-COMBINED TOTAL: 3,341,859 rows
+explore_311 total : 3,341,859 rows
+311_requests_clean: 79,808 rows (flood/water filtered)

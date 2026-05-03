@@ -1,18 +1,24 @@
+import sys
 import pandas as pd
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from src.utils.standardize_columns import col_to_snake
 DIST_CSV = ROOT / "data/raw_data/watermains/distribution-watermain-4326.csv"
 TRANS_CSV = ROOT / "data/raw_data/watermains/transmission-watermain-4326.csv"
 OUTPUT_PATH = ROOT / "data/cleaned_data/watermains"
 OUTPUT_PATH.mkdir(parents=True, exist_ok=True)
 
-INT_COLS = ["_id", "Watermain Type", "Watermain Diameter", "Watermain Construction Year"]
-FLOAT_COLS = ["Watermain Measured Length"]
+INT_COLS = ["_id", "watermain_type", "watermain_diameter", "watermain_construction_year"]
+FLOAT_COLS = ["watermain_measured_length"]
 
 
 def clean(df):
     changes = {}
+
+    df = col_to_snake(df)
 
     # Drop geometry — spatial data, used only in transformations
     if "geometry" in df.columns:
@@ -25,10 +31,10 @@ def clean(df):
     changes["duplicates_removed"] = before - len(df)
 
     # Parse install date
-    df["Watermain Install Date"] = pd.to_datetime(
-        df["Watermain Install Date"], errors="coerce", utc=False
+    df["watermain_install_date"] = pd.to_datetime(
+        df["watermain_install_date"], errors="coerce", utc=False
     ).dt.normalize()
-    changes["Watermain Install Date"] = "parsed to date (time component removed)"
+    changes["watermain_install_date"] = "parsed to date (time component removed)"
 
     # Cast integer columns
     for col in INT_COLS:
@@ -44,7 +50,7 @@ def clean(df):
     changes["cast_to_float"] = [c for c in FLOAT_COLS if c in df.columns]
 
     # Strip whitespace on string columns
-    str_cols = ["Watermain Asset Identification", "Watermain Material", "Watermain Location Description"]
+    str_cols = ["watermain_asset_identification", "watermain_material", "watermain_location_description"]
     for col in str_cols:
         if col in df.columns:
             df[col] = df[col].str.strip().replace("", pd.NA)
@@ -62,11 +68,11 @@ def write_report(dist_changes, trans_changes, combined_len, out_path):
     lines = ["WATERMAINS — CLEANING REPORT", "=" * 50, ""]
     for label, ch in [("Distribution", dist_changes), ("Transmission", trans_changes)]:
         lines.append(f"{label}: {ch['rows_raw']:,} raw rows -> {ch['rows_clean']:,} clean rows")
-        lines.append(f"  Duplicates removed       : {ch['duplicates_removed']:,}")
-        lines.append(f"  geometry column          : {ch['geometry']}")
-        lines.append(f"  Watermain Install Date   : {ch['Watermain Install Date']}")
-        lines.append(f"  Columns cast to int      : {ch['cast_to_int']}")
-        lines.append(f"  Columns cast to float    : {ch['cast_to_float']}")
+        lines.append(f"  Duplicates removed         : {ch['duplicates_removed']:,}")
+        lines.append(f"  geometry column            : {ch['geometry']}")
+        lines.append(f"  watermain_install_date     : {ch['watermain_install_date']}")
+        lines.append(f"  Columns cast to int        : {ch['cast_to_int']}")
+        lines.append(f"  Columns cast to float      : {ch['cast_to_float']}")
         if ch["missing_per_col"]:
             lines.append("  Missing values (NaN) per column:")
             for col, n in ch["missing_per_col"].items():
